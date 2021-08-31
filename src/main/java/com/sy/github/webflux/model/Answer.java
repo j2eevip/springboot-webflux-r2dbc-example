@@ -13,10 +13,13 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @ToString
 @EqualsAndHashCode
-@Table("t_user")
-public class User {
+@Table("t_answer")
+public class Answer {
     @Id
-    private Long id;
-    private String name;
-    private String gender;
+    private Integer id;
+    private String tcode;
+    private String orgLawName;
+    private Integer ticlass;
+    private String tianalysis;
+    private String title;
 }
