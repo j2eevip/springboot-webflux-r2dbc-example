@@ -37,24 +37,22 @@ public class WebFluxConfiguration implements WebFluxConfigurer {
 
     /**
      * 全局跨域配置，根据各自需求定义
-     * @param registry
      */
-    /*@Override
+    @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
             .allowedOriginPatterns("*")
-            .allowCredentials(true)
+            .allowCredentials(false)
             .allowedOrigins("*")
             .allowedHeaders("*")
             .allowedMethods("*")
             .exposedHeaders(HttpHeaders.SET_COOKIE);
-    }*/
+    }
 
     /**
      * 也可以继承CorsWebFilter使用@Component注解，效果是一样的
-     * @return
      */
-    /*@Bean
+    @Bean
     CorsWebFilter corsWebFilter(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
@@ -65,5 +63,5 @@ public class WebFluxConfiguration implements WebFluxConfigurer {
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
         corsConfigurationSource.registerCorsConfiguration("/**",corsConfiguration);
         return new CorsWebFilter(corsConfigurationSource);
-    }*/
+    }
 }
