@@ -44,6 +44,11 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.8</version>
     </dependency>
+    <dependency>
+      <groupId>com.esotericsoftware</groupId>
+      <artifactId>kryo</artifactId>
+      <version>5.2.0</version>
+    </dependency>
     <!--<dependency>
       <groupId>io.r2dbc</groupId>
       <artifactId>r2dbc-h2</artifactId>

@@ -3,14 +3,18 @@ package com.sy.github.webflux;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.esotericsoftware.kryo.Kryo;
 import com.sy.github.webflux.common.CommonResult;
 import com.sy.github.webflux.model.Answer;
 import com.sy.github.webflux.model.AnswerOption;
+import com.sy.github.webflux.model.User;
 import com.sy.github.webflux.repository.AnswerOptionRepository;
 import com.sy.github.webflux.repository.AnswerRepository;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +23,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import reactor.core.publisher.Flux;
@@ -28,7 +34,6 @@ import reactor.core.publisher.Mono;
 /**
  * @author Sherlock
  */
-@EnableWebFlux
 @RestController
 @SpringBootApplication
 public class WebfluxApplication {
@@ -42,6 +47,12 @@ public class WebfluxApplication {
 
     @Autowired
     private AnswerOptionRepository answerOptionRepository;
+
+    @PostMapping(value = "test/{id}", consumes = "application/x-kryo", produces = "application/x-kryo")
+    public User testKryo(@RequestBody User user, @PathVariable("id") String id) {
+        System.out.println(id);
+        return user;
+    }
 
     @PostMapping("add")
     public Mono<Answer> println() throws IOException {
@@ -76,7 +87,8 @@ public class WebfluxApplication {
     }
 
     @GetMapping("/list")
-    public Flux<String> list() {
+    public Flux<String> list() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5L);
         // 查询列表
         List<String> result = new ArrayList<>();
         result.add("trek");
